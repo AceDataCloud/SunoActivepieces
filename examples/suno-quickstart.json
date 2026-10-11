@@ -1,0 +1,118 @@
+{
+  "name": "Suno quickstart",
+  "type": "SHARED",
+  "summary": "",
+  "description": "",
+  "tags": [],
+  "blogUrl": "",
+  "metadata": {
+    "externalId": "gz1stpV1lpST3bzSrjR0D"
+  },
+  "author": "Ace Data Cloud",
+  "categories": [],
+  "pieces": [
+    "@activepieces/piece-manual-trigger",
+    "@acedatacloud/piece-suno"
+  ],
+  "flows": [
+    {
+      "displayName": "Suno quickstart",
+      "trigger": {
+        "name": "trigger",
+        "valid": true,
+        "displayName": "Manual Trigger",
+        "nextAction": {
+          "name": "step_1",
+          "skip": false,
+          "type": "PIECE",
+          "valid": false,
+          "settings": {
+            "input": {
+              "auth": "",
+              "model": "chirp-v6",
+              "prompt": "A short gentle instrumental piano melody for a sunrise, no vocals.",
+              "duration": "10",
+              "instrumental": true
+            },
+            "pieceName": "@acedatacloud/piece-suno",
+            "actionName": "generate_audio",
+            "sampleData": {},
+            "pieceVersion": "0.1.0",
+            "propertySettings": {
+              "model": {
+                "type": "MANUAL"
+              },
+              "prompt": {
+                "type": "MANUAL"
+              },
+              "duration": {
+                "type": "MANUAL"
+              },
+              "instrumental": {
+                "type": "MANUAL"
+              }
+            },
+            "errorHandlingOptions": {
+              "retryOnFailure": {
+                "value": false
+              },
+              "continueOnFailure": {
+                "value": false
+              }
+            }
+          },
+          "nextAction": {
+            "name": "step_2",
+            "skip": false,
+            "type": "PIECE",
+            "valid": false,
+            "settings": {
+              "input": {
+                "auth": "",
+                "taskId": "{{step_1['output']['task_id']}}"
+              },
+              "pieceName": "@acedatacloud/piece-suno",
+              "actionName": "get_task",
+              "sampleData": {},
+              "pieceVersion": "0.1.0",
+              "propertySettings": {
+                "taskId": {
+                  "type": "MANUAL"
+                }
+              },
+              "errorHandlingOptions": {
+                "retryOnFailure": {
+                  "value": false
+                },
+                "continueOnFailure": {
+                  "value": false
+                }
+              }
+            },
+            "displayName": "Get Suno task",
+            "lastUpdatedDate": "2026-10-11T15:59:36.284Z"
+          },
+          "displayName": "Create Suno audio task",
+          "lastUpdatedDate": "2026-10-11T15:40:03.227Z"
+        },
+        "lastUpdatedDate": "2026-10-11T15:29:17.786Z",
+        "type": "PIECE_TRIGGER",
+        "settings": {
+          "propertySettings": {
+            "markdown": {
+              "type": "MANUAL"
+            }
+          },
+          "pieceName": "@activepieces/piece-manual-trigger",
+          "pieceVersion": "0.0.8",
+          "triggerName": "manual_trigger",
+          "input": {}
+        }
+      },
+      "valid": true,
+      "schemaVersion": "27",
+      "notes": []
+    }
+  ],
+  "status": "PUBLISHED"
+}

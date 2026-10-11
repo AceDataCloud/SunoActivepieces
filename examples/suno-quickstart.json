@@ -37,7 +37,7 @@
             "pieceName": "@acedatacloud/piece-suno",
             "actionName": "generate_audio",
             "sampleData": {},
-            "pieceVersion": "0.1.0",
+            "pieceVersion": "0.1.1",
             "propertySettings": {
               "model": {
                 "type": "MANUAL"
@@ -74,7 +74,7 @@
               "pieceName": "@acedatacloud/piece-suno",
               "actionName": "get_task",
               "sampleData": {},
-              "pieceVersion": "0.1.0",
+              "pieceVersion": "0.1.1",
               "propertySettings": {
                 "taskId": {
                   "type": "MANUAL"

@@ -2,11 +2,11 @@
 
 通过 Ace Data Cloud 创建 Suno 音乐，并按**同一个任务 ID** 查询结果。Piece 提供两个动作：**Create Suno audio task**（创建音频任务）和 **Get Suno task**（查询任务）。创建请求返回任务 ID 不代表音频已经完成。[English](README.md)
 
-**分发状态：**`0.1.0` 目前是已可构建的源码包，尚未发布到 npm 或进入 Activepieces 公共目录。上游当前暂停接收外部作者向 monorepo 发起的非邀约 PR，允许作者在仓库外发布自己的 Piece 包。npm 发布后，实例管理员可安装 `@acedatacloud/piece-suno`。
+**分发状态：**[`@acedatacloud/piece-suno`](https://www.npmjs.com/package/@acedatacloud/piece-suno) 已作为附带 provenance 的公开 npm 包分发。实例管理员可安装 `0.1.1`；它尚未进入 Activepieces 共享公共目录。上游当前暂停接收外部作者向 monorepo 发起的非邀约 PR，允许作者在仓库外发布自己的 Piece 包。
 
 ## 1. 安装 Piece
 
-在 Activepieces 0.92.2 中进入 **Platform Admin → Catalogue → Pieces → Install Piece**，选择 **NPM Registry**，填写 `@acedatacloud/piece-suno` 和版本 `0.1.0`，点击 **Install**。该版本正式发布到 npm 后才能从注册表安装。我们实测的社区版中，**Packed Archive (.tgz)** 选项处于禁用状态。
+在 Activepieces 0.92.2 中进入 **Platform Admin → Catalogue → Pieces → Install Piece**，选择 **NPM Registry**，填写 `@acedatacloud/piece-suno` 和版本 `0.1.1`，点击 **Install**。我们实测的社区版中，**Packed Archive (.tgz)** 选项处于禁用状态。
 
 安装后，在流程中添加动作并搜索 **Suno by Ace Data Cloud**，核对名称、Ace Data Cloud Logo 和两个动作。源码仓库或 npm 上有包，不等于所有 Activepieces 用户都能在共享目录里直接搜到；目标实例仍需管理员安装。
 

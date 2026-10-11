@@ -10,6 +10,11 @@ In Activepieces 0.92.2, open **Platform Admin → Catalogue → Pieces → Insta
 
 After installation, open a flow and search for **Suno by Ace Data Cloud** when adding an action. Check the Piece name, Ace Data Cloud logo and the two actions before configuring credentials. A package in a repository or on npm is not automatically listed for every Activepieces user; the administrator must install it in the target instance.
 
+These screenshots come from an isolated Activepieces CE 0.92.2 instance where the build archive was installed through the official API. They show instance installation, not a shared catalog listing:
+
+![Installed Suno Piece in the instance administrator catalog](https://raw.githubusercontent.com/AceDataCloud/SunoActivepieces/main/docs/screenshots/01-installed-catalog.jpg)
+![Suno actions in the flow search](https://raw.githubusercontent.com/AceDataCloud/SunoActivepieces/main/docs/screenshots/02-action-search.jpg)
+
 For developers, the package can be built without a key:
 
 ```bash
@@ -30,7 +35,7 @@ Use the API key itself in Activepieces, without a `Bearer ` prefix. A platform m
 
 ## 3. Configure a first flow
 
-1. Choose **Start from scratch**, then select a trigger suitable for your project.
+1. Choose **Start from scratch**, then select a trigger suitable for your project. For the tested on-demand example, install the official `@activepieces/piece-manual-trigger` version `0.0.8` if it is not already in your instance, and choose **Manual Trigger**.
 2. Add **Suno by Ace Data Cloud → Create Suno audio task**. Create a connection with the Ace Data Cloud API key.
 3. Use model `chirp-v6`, turn **Instrumental only** on, and enter this music description:
 
@@ -42,6 +47,11 @@ Use the API key itself in Activepieces, without a `Bearer ` prefix. A platform m
 5. Run the creation action **once**. Save its `task_id`. Disable automatic retries on this action if your flow retries failed steps, because a repeated creation is a new billable task.
 6. Add **Get Suno task** and map **Task ID** from the creation action's `task_id` output. It makes one read-only query. If it returns `pending`, wait and query that **same task ID** again. In a repeated flow, keep the creation action outside the repeat path.
 7. When `status` is `succeeded` and `success` is `true`, open a URL in `media_urls`. An audio preview while the task is pending is not a final result. If status is `failed`, inspect the task or trace ID in Ace Data Cloud request history.
+
+You can [download the credential-free quickstart flow](https://raw.githubusercontent.com/AceDataCloud/SunoActivepieces/main/examples/suno-quickstart.json) and import it with **Automations → Import → Import Flow**. The import was tested in Activepieces 0.92.2: both Suno actions and the `task_id` mapping survived. Both actions intentionally show **Select a connection** after import; configure your own key before running. The sample does not contain the test task ID, connection ID or API key.
+
+![Imported creation action with its connection left empty](https://raw.githubusercontent.com/AceDataCloud/SunoActivepieces/main/docs/screenshots/03-imported-create-config.jpg)
+![Imported lookup action mapping the previous task ID](https://raw.githubusercontent.com/AceDataCloud/SunoActivepieces/main/docs/screenshots/04-imported-flow.jpg)
 
 The request shape below is a credential-free reference for the two actions. It is also copyable with a key stored in the `ACEDATACLOUD_API_TOKEN` environment variable:
 

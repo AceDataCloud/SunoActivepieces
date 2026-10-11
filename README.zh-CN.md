@@ -10,6 +10,11 @@
 
 安装后，在流程中添加动作并搜索 **Suno by Ace Data Cloud**，核对名称、Ace Data Cloud Logo 和两个动作。源码仓库或 npm 上有包，不等于所有 Activepieces 用户都能在共享目录里直接搜到；目标实例仍需管理员安装。
 
+以下截图来自独立的 Activepieces CE 0.92.2 实例，通过官方 API 安装构建好的包。它们证明实例内可用，不代表进入了共享公共目录：
+
+![实例管理员目录中的 Suno Piece](https://raw.githubusercontent.com/AceDataCloud/SunoActivepieces/main/docs/screenshots/01-installed-catalog.jpg)
+![流程搜索中的两个 Suno 动作](https://raw.githubusercontent.com/AceDataCloud/SunoActivepieces/main/docs/screenshots/02-action-search.jpg)
+
 开发者无需密钥即可构建和验证：
 
 ```bash
@@ -30,7 +35,7 @@ npm pack
 
 ## 3. 建立首个流程
 
-1. 选择 **Start from scratch**，再选择适合项目的触发器。
+1. 选择 **Start from scratch**，再选择适合项目的触发器。若使用我们实测的手动首跑示例，目标实例没有 **Manual Trigger** 时先安装官方 `@activepieces/piece-manual-trigger` 版本 `0.0.8`。
 2. 添加 **Suno by Ace Data Cloud → Create Suno audio task**，使用 Ace Data Cloud API Key 新建连接。
 3. 模型选 `chirp-v6`，打开 **Instrumental only**，音乐描述填写：
 
@@ -42,6 +47,11 @@ npm pack
 5. **只运行一次**创建动作，保存输出的 `task_id`。若流程会重试失败步骤，请关闭创建动作的自动重试；每次创建都可能产生新的计费任务。
 6. 添加 **Get Suno task**，将 **Task ID** 映射为创建动作输出的 `task_id`。该动作只查询一次。若返回 `pending`，等待后只查询**同一个任务 ID**；重复查询流程不要重新执行创建动作。
 7. 仅当 `status=succeeded` 且 `success=true` 时，打开 `media_urls` 中的链接。pending 时的试听链接不是最终成品；`failed` 时用任务或 Trace ID 查询请求历史。
+
+可以[下载无密钥首跑流程](https://raw.githubusercontent.com/AceDataCloud/SunoActivepieces/main/examples/suno-quickstart.json)，在 **Automations → Import → Import Flow** 中导入。此文件已在 Activepieces 0.92.2 中实际导入：两个 Suno 动作和 `task_id` 变量映射均保留。导入后的两个动作会显示 **Select a connection**，请先配置自己的 Key。示例中没有测试任务 ID、连接 ID 或 API Key。
+
+![导入后连接仍为空的创建动作](https://raw.githubusercontent.com/AceDataCloud/SunoActivepieces/main/docs/screenshots/03-imported-create-config.jpg)
+![导入后映射上一步任务 ID 的查询动作](https://raw.githubusercontent.com/AceDataCloud/SunoActivepieces/main/docs/screenshots/04-imported-flow.jpg)
 
 以下两条无密钥示例命令可直接复制使用；先在环境变量 `ACEDATACLOUD_API_TOKEN` 中放入自己的 Key：
 

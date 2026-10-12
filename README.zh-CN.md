@@ -27,9 +27,11 @@ npm pack
 
 ## 2. 获取 Ace Data Cloud API Key
 
-1. 登录 [Ace Data Cloud Applications](https://platform.acedata.cloud/console/applications)。
-2. 打开具备 **Suno** 权限的应用，生成前查看当前[价格](https://platform.acedata.cloud/models)和余额。
-3. 复制 API Key，或在 **Manage Keys** 创建单独密钥。若设置 **Allowed APIs**，应同时包含 `/suno/audios` 与 `/suno/tasks`。
+新账号请先注册并登录。若 Applications 页面没有通用应用，点击 **Initialize General Application**。通用应用 Key 可访问账号已获授权的服务；专用应用 Key 仅限对应服务。
+
+1. 登录 [Ace Data Cloud Applications](https://platform.acedata.cloud/console/applications?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_api_key)。
+2. 打开具备 **Suno** 权限的应用，生成前查看当前[价格](https://platform.acedata.cloud/models?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_pricing)和余额。
+3. 使用应用卡片的复制按钮，或进入 **Manage Keys → Create** 创建名为 `Activepieces Suno` 的独立 Key，按需设置有效期、用量限制与 API 限制，创建后复制 Key。若设置 **Allowed APIs**，应同时包含 `/suno/audios` 与 `/suno/tasks`。
 
 在 Activepieces 连接中只填 Key 本身，不要加 `Bearer `。平台管理 Token 不是生成 API Key。不要把 Key 写进提示词或流程导出文件。
 
@@ -73,7 +75,7 @@ curl -X POST https://api.acedata.cloud/suno/tasks \
 
 ## 4. 核对费用与排障
 
-在 Ace Data Cloud 的请求历史和账单里核对**一次**创建请求、任务 ID 和 Credits 扣费。查询任务不会新建歌曲。每次付费生成前应读取控制台当前价格和服务权限。
+在 [Ace Data Cloud 的请求历史和账单](https://platform.acedata.cloud/console/usages?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_request_history)里核对**一次**创建请求、任务 ID 和 Credits 扣费。查询任务不会新建歌曲。每次付费生成前应读取控制台当前价格和服务权限。
 
 | 现象 | 处理 |
 | --- | --- |

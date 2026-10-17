@@ -1,4 +1,5 @@
-import { HttpMethod, httpClient } from '@activepieces/pieces-common';
+import { HttpMethod } from '@activepieces/pieces-common';
+import { httpClient } from '../secure-http';
 
 async function postSuno({
   token,

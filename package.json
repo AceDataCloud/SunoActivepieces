@@ -27,6 +27,7 @@
     "@activepieces/pieces-framework": "0.32.0"
   },
   "devDependencies": {
+    "@types/node": "24.11.0",
     "typescript": "5.9.3"
   }
 }

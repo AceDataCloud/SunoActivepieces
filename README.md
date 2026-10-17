@@ -87,3 +87,5 @@ Confirm the **one** creation request, task ID and Credits deduction in [Ace Data
 | `failed` | Use the task or trace ID to inspect the failed request; do not share the key. |
 
 The Piece sends the selected inputs and API key to `https://api.acedata.cloud`. It returns only final media URLs and removes internal routing fields from task output. [Source](https://github.com/AceDataCloud/SunoActivepieces) · [Support](https://github.com/AceDataCloud/SunoActivepieces/issues) · dev@acedata.cloud.
+
+API requests verify HTTPS certificates and stay on `api.acedata.cloud`. Transport failures and HTTP errors are not retried automatically; inspect request history before resubmitting a creation. HTTPS proxy configuration is not supported by this transport.

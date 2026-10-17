@@ -87,3 +87,5 @@ curl -X POST https://api.acedata.cloud/suno/tasks \
 | `failed` | 用任务或 Trace ID 查失败原因，不要泄漏 Key。 |
 
 Piece 只向 `https://api.acedata.cloud` 发送用户所选输入与 API Key。任务输出仅在终态展示媒体链接，并过滤内部路由字段。[源码](https://github.com/AceDataCloud/SunoActivepieces) · [支持](https://github.com/AceDataCloud/SunoActivepieces/issues) · dev@acedata.cloud。
+
+API 请求验证 HTTPS 证书，且仅访问 `api.acedata.cloud`。网络失败与 HTTP 错误不自动重试；重新创建前先查请求历史。此传输方式不支持 HTTPS 代理配置。

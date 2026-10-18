@@ -37,7 +37,16 @@ jobs:
           cache: npm
       - run: npm ci --legacy-peer-deps --ignore-scripts
       - run: npm test
+      - name: Verify unused immutable registry version
+        run: node scripts/registry-release.cjs check
       - name: Publish with provenance
         run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Read back registry artifact and provenance
+        run: node scripts/registry-release.cjs verify
+      - uses: actions/upload-artifact@v4
+        with:
+          name: registry-readback
+          path: artifacts/registry-readback.json
+          if-no-files-found: error

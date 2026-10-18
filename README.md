@@ -2,11 +2,11 @@
 
 Create Suno music and retrieve the **same task** through Ace Data Cloud. The Piece has two actions: **Create Suno audio task** and **Get Suno task**. A successful submission returns a task ID; it does not mean the audio is ready.
 
-**Distribution:** [`@acedatacloud/piece-suno`](https://www.npmjs.com/package/@acedatacloud/piece-suno) is a public npm package with provenance. An administrator can install version `0.1.1` into their Activepieces instance. It is not listed in the shared Activepieces catalog. Activepieces currently permits external authors to publish Pieces as their own packages while unsolicited monorepo pull requests are paused. [中文指南](README.zh-CN.md)
+**Distribution:** [`@acedatacloud/piece-suno`](https://www.npmjs.com/package/@acedatacloud/piece-suno) is a public npm package with provenance. An administrator can install version `0.1.2` into their Activepieces instance. It is not listed in the shared Activepieces catalog. Activepieces currently permits external authors to publish Pieces as their own packages while unsolicited monorepo pull requests are paused. [中文指南](README.zh-CN.md)
 
 ## 1. Install the Piece
 
-In Activepieces 0.92.2, open **Platform Admin → Catalogue → Pieces → Install Piece**. Select **NPM Registry**, enter `@acedatacloud/piece-suno` and version `0.1.1`, then choose **Install**. On the Community Edition instance tested for this guide, **Packed Archive (.tgz)** was disabled in the UI.
+In Activepieces 0.92.2, open **Platform Admin → Catalogue → Pieces → Install Piece**. Select **NPM Registry**, enter `@acedatacloud/piece-suno` and version `0.1.2`, then choose **Install**. On the Community Edition instance tested for this guide, **Packed Archive (.tgz)** was disabled in the UI.
 
 After installation, open a flow and search for **Suno by Ace Data Cloud** when adding an action. Check the Piece name, Ace Data Cloud logo and the two actions before configuring credentials. A package in a repository or on npm is not automatically listed for every Activepieces user; the administrator must install it in the target instance.
 

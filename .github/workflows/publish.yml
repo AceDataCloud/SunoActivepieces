@@ -4,6 +4,11 @@ on:
   push:
     tags: ['v*.*.*']
   workflow_dispatch:
+    inputs:
+      verify_only:
+        description: Read back the published package without publishing again
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -36,17 +41,25 @@ jobs:
           registry-url: https://registry.npmjs.org
           cache: npm
       - run: npm ci --legacy-peer-deps --ignore-scripts
+        if: github.event.inputs.verify_only != 'true'
       - run: npm test
+        if: github.event.inputs.verify_only != 'true'
       - name: Verify unused immutable registry version
+        if: github.event.inputs.verify_only != 'true'
         run: node scripts/registry-release.cjs check
       - name: Publish with provenance
+        if: github.event.inputs.verify_only != 'true'
         run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Read back registry artifact and provenance
         run: node scripts/registry-release.cjs verify
+      - name: Install the published package in a fresh npm consumer
+        run: |
+          npm install --prefix /tmp/ace-public-consumer --ignore-scripts --legacy-peer-deps --no-audit --no-fund --registry=https://registry.npmjs.org "$(node -p "require('./package.json').name + '@' + require('./package.json').version")"
+          node scripts/verify-consumer.cjs /tmp/ace-public-consumer
       - uses: actions/upload-artifact@v4
         with:
           name: registry-readback
-          path: artifacts/registry-readback.json
+          path: artifacts/*.json
           if-no-files-found: error

@@ -21,14 +21,29 @@ jobs:
           npm install --prefix /tmp/ace-public-consumer --ignore-scripts --legacy-peer-deps --no-audit --no-fund --registry=https://registry.npmjs.org @acedatacloud/piece-suno@0.1.2 @acedatacloud/piece-gpt-image@0.1.1 @acedatacloud/piece-seedance@0.1.1 @acedatacloud/piece-fish-audio@0.1.1 @acedatacloud/piece-seedream@0.1.1 @acedatacloud/piece-happyhorse@0.1.0 @acedatacloud/piece-nano-banana@0.1.0
       - name: Start isolated official Community Edition
         run: |
-          docker run -d --name ace-ce-validation -p 127.0.0.1:39128:80 -e AP_DB_TYPE=PGLITE -e AP_REDIS_TYPE=MEMORY -e AP_TELEMETRY_ENABLED=false -e AP_PIECES_SYNC_MODE=NONE -e AP_EXECUTION_MODE=UNSANDBOXED -e AP_FRONTEND_URL=http://127.0.0.1:39128 activepieces/activepieces:0.92.3
+          python3 - <<'PYSECRETS'
+          import pathlib, secrets
+          values = {'AP_JWT_SECRET': secrets.token_hex(32), 'AP_ENCRYPTION_KEY': secrets.token_hex(16)}
+          for value in values.values():
+              print('::add-mask::' + value)
+          env_file = pathlib.Path('/tmp/ace-ce-validation.env')
+          env_file.write_text(''.join(key + '=' + value + '\n' for key, value in values.items()))
+          env_file.chmod(0o600)
+          PYSECRETS
+          docker run --env-file /tmp/ace-ce-validation.env -d --name ace-ce-validation -p 127.0.0.1:39128:80 -e AP_DB_TYPE=PGLITE -e AP_REDIS_TYPE=MEMORY -e AP_TELEMETRY_ENABLED=false -e AP_PIECES_SYNC_MODE=NONE -e AP_EXECUTION_MODE=UNSANDBOXED -e AP_FRONTEND_URL=http://127.0.0.1:39128 activepieces/activepieces:0.92.3
       - name: Install registry Pieces and import credential-free templates
         run: python3 scripts/verify-ce-install.py
+      - name: Preserve sanitized host diagnostics
+        if: always()
+        run: python3 scripts/collect-ce-diagnostics.py
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: ce-install-readback
-          path: artifacts/ce-install.json
+          path: artifacts/ce-*
           if-no-files-found: error
       - name: Stop disposable host
         if: always()
-        run: docker rm -f ace-ce-validation || true
+        run: |
+          docker rm -f ace-ce-validation || true
+          rm -f /tmp/ace-ce-validation.env

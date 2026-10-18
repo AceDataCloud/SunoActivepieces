@@ -17,6 +17,7 @@ jobs:
           cache: npm
       - run: npm ci --legacy-peer-deps --ignore-scripts
       - run: node --check scripts/registry-release.cjs
+      - run: node --check scripts/verify-consumer.cjs
       - run: npm test
       - run: npm pack --dry-run
 

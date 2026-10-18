@@ -28,10 +28,15 @@ function newer(a, b) {
   }
   if (process.argv[2] !== 'verify') throw new Error('Use check or verify.');
   let metadata;
-  for (let attempt = 0; attempt < 5; attempt++) {
-    metadata = await read(`${endpoint}/${pkg.version}`, true);
+  for (let attempt = 0; attempt < 12; attempt++) {
+    const fresh = `?ace_readback=${Date.now()}-${attempt}`;
+    metadata = await read(`${endpoint}/${pkg.version}${fresh}`, true);
+    if (!metadata) {
+      const packument = await read(`${endpoint}${fresh}`, true);
+      metadata = packument?.versions?.[pkg.version];
+    }
     if (metadata) break;
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 5000));
   }
   if (!metadata || metadata.version !== pkg.version || metadata.name !== pkg.name) throw new Error('Published package metadata does not match this release.');
   const tarball = new URL(metadata.dist.tarball);

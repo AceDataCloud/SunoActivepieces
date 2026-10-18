@@ -27,9 +27,11 @@ The `.tgz` contains compiled JavaScript and declarations. Do not put a key in th
 
 ## 2. Get an Ace Data Cloud API key
 
-1. Sign in to [Ace Data Cloud Applications](https://platform.acedata.cloud/console/applications).
-2. Open an application with **Suno** access. Check the current [pricing](https://platform.acedata.cloud/models) and balance before generating.
-3. Copy its API key, or create a separate key under **Manage Keys**. If you restrict **Allowed APIs**, include both `/suno/audios` and `/suno/tasks`.
+New account? Register and sign in first. If the Applications page has no General application, choose **Initialize General Application**. A General key can access the services your account is entitled to use; a service-specific key is limited to that service.
+
+1. Sign in to [Ace Data Cloud Applications](https://platform.acedata.cloud/console/applications?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_api_key).
+2. Open an application with **Suno** access. Check the current [pricing](https://platform.acedata.cloud/models?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_pricing) and balance before generating.
+3. Use the application's copy button, or open **Manage Keys → Create** to create a separate key named `Activepieces Suno`. Set expiry, usage limits and API restrictions as needed, then copy the created key. If you restrict **Allowed APIs**, include both `/suno/audios` and `/suno/tasks`.
 
 Use the API key itself in Activepieces, without a `Bearer ` prefix. A platform management token is not a generation API key. Keep the key in an Activepieces connection, never a prompt or flow export.
 
@@ -73,7 +75,7 @@ curl -X POST https://api.acedata.cloud/suno/tasks \
 
 ## 4. Check cost and troubleshoot
 
-Confirm the **one** creation request, task ID and Credits deduction in Ace Data Cloud request history and billing. Task queries do not create another song. Current prices and entitlements may change; read them in the console before each paid generation.
+Confirm the **one** creation request, task ID and Credits deduction in [Ace Data Cloud request history and billing](https://platform.acedata.cloud/console/usages?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_request_history). Task queries do not create another song. Current prices and entitlements may change; read them in the console before each paid generation.
 
 | Result | Action |
 | --- | --- |
@@ -85,3 +87,13 @@ Confirm the **one** creation request, task ID and Credits deduction in Ace Data 
 | `failed` | Use the task or trace ID to inspect the failed request; do not share the key. |
 
 The Piece sends the selected inputs and API key to `https://api.acedata.cloud`. It returns only final media URLs and removes internal routing fields from task output. [Source](https://github.com/AceDataCloud/SunoActivepieces) · [Support](https://github.com/AceDataCloud/SunoActivepieces/issues) · dev@acedata.cloud.
+
+API requests verify HTTPS certificates and stay on `api.acedata.cloud`. Transport failures and HTTP errors are not retried automatically; inspect request history before resubmitting a creation. HTTPS proxy configuration is not supported by this transport.
+
+## Visual setup references
+
+![Copy a key or open Manage Keys: real redacted Ace console](docs/screenshots/get-api-key-en.png)
+![Create a dedicated key: real redacted Ace console](docs/screenshots/create-api-key-en.png)
+![Official Activepieces generic installation dialog](docs/screenshots/install-piece.png)
+
+References reused on 2026-10-18; [fixed sources and limits](docs/screenshots/onboarding-source.json). The installation picture is an official generic reference, not proof this Piece is in the shared catalog. After administrator installation, search the service name, select **by Ace Data Cloud**, and keep the raw API key in the action connection. Source PR, immutable npm release, official shared-catalog acceptance and first use are separate stages.

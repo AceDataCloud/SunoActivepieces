@@ -27,9 +27,11 @@ npm pack
 
 ## 2. 获取 Ace Data Cloud API Key
 
-1. 登录 [Ace Data Cloud Applications](https://platform.acedata.cloud/console/applications)。
-2. 打开具备 **Suno** 权限的应用，生成前查看当前[价格](https://platform.acedata.cloud/models)和余额。
-3. 复制 API Key，或在 **Manage Keys** 创建单独密钥。若设置 **Allowed APIs**，应同时包含 `/suno/audios` 与 `/suno/tasks`。
+新账号请先注册并登录。若 Applications 页面没有通用应用，点击 **Initialize General Application**。通用应用 Key 可访问账号已获授权的服务；专用应用 Key 仅限对应服务。
+
+1. 登录 [Ace Data Cloud Applications](https://platform.acedata.cloud/console/applications?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_api_key)。
+2. 打开具备 **Suno** 权限的应用，生成前查看当前[价格](https://platform.acedata.cloud/models?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_pricing)和余额。
+3. 使用应用卡片的复制按钮，或进入 **Manage Keys → Create** 创建名为 `Activepieces Suno` 的独立 Key，按需设置有效期、用量限制与 API 限制，创建后复制 Key。若设置 **Allowed APIs**，应同时包含 `/suno/audios` 与 `/suno/tasks`。
 
 在 Activepieces 连接中只填 Key 本身，不要加 `Bearer `。平台管理 Token 不是生成 API Key。不要把 Key 写进提示词或流程导出文件。
 
@@ -73,7 +75,7 @@ curl -X POST https://api.acedata.cloud/suno/tasks \
 
 ## 4. 核对费用与排障
 
-在 Ace Data Cloud 的请求历史和账单里核对**一次**创建请求、任务 ID 和 Credits 扣费。查询任务不会新建歌曲。每次付费生成前应读取控制台当前价格和服务权限。
+在 [Ace Data Cloud 的请求历史和账单](https://platform.acedata.cloud/console/usages?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_request_history)里核对**一次**创建请求、任务 ID 和 Credits 扣费。查询任务不会新建歌曲。每次付费生成前应读取控制台当前价格和服务权限。
 
 | 现象 | 处理 |
 | --- | --- |
@@ -85,3 +87,13 @@ curl -X POST https://api.acedata.cloud/suno/tasks \
 | `failed` | 用任务或 Trace ID 查失败原因，不要泄漏 Key。 |
 
 Piece 只向 `https://api.acedata.cloud` 发送用户所选输入与 API Key。任务输出仅在终态展示媒体链接，并过滤内部路由字段。[源码](https://github.com/AceDataCloud/SunoActivepieces) · [支持](https://github.com/AceDataCloud/SunoActivepieces/issues) · dev@acedata.cloud。
+
+API 请求验证 HTTPS 证书，且仅访问 `api.acedata.cloud`。网络失败与 HTTP 错误不自动重试；重新创建前先查请求历史。此传输方式不支持 HTTPS 代理配置。
+
+## 图文配置参考
+
+![复制 Key 或管理密钥：真实脱敏 Ace 控制台](docs/screenshots/get-api-key-en.png)
+![创建独立 Key：真实脱敏 Ace 控制台](docs/screenshots/create-api-key-en.png)
+![官方 Activepieces 通用安装弹窗](docs/screenshots/install-piece.png)
+
+2026-10-18 复用的真实/官方参考图，[固定来源与边界](docs/screenshots/onboarding-source.json)保留。安装图不是本 Piece 已被官方共享目录收录的证明。管理员安装后按服务名搜索并核对 **by Ace Data Cloud**；Key 只放动作连接。源码 PR、npm 发版、官方目录收录与真实首用分别验收。

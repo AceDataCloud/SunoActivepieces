@@ -32,7 +32,7 @@ test('release guard accepts a new immutable version and rejects collision or reg
   assert.match(regression.stderr, /advance/);
 });
 
-test('readback bypasses cached absence and verifies actual archive integrity and provenance', () => {
+test('readback verifies canonical registry metadata, archive integrity and provenance', () => {
   const crypto = require('node:crypto');
   const { execFileSync } = require('node:child_process');
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'ace-readback-test-'));
@@ -59,7 +59,7 @@ test('readback bypasses cached absence and verifies actual archive integrity and
       global.fetch = async value => { const url=new URL(value);
         if(url.pathname==='/test.tgz')return new Response(fs.readFileSync(${JSON.stringify(archive)}));
         if(url.pathname==='/test-attestation')return new Response(JSON.stringify({attestations:[{predicateType:'https://slsa.dev/provenance/v1'}]}));
-        if(!url.searchParams.has('ace_readback'))throw new Error('Readback must bypass cached metadata.');
+        if(url.search)throw new Error('Use the canonical registry endpoint without synthetic query parameters.');
         if(url.pathname.endsWith('/'+metadata.version))return new Response('{}',{status:404});
         return new Response(JSON.stringify({versions:{[metadata.version]:metadata}})); };
     `);

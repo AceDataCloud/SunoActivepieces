@@ -39,7 +39,7 @@ test('readback bypasses cached absence and verifies actual archive integrity and
   try {
     const packageRoot = path.join(directory, 'package');
     for (const subdirectory of ['examples', 'dist/src', 'docs/screenshots']) fs.mkdirSync(path.join(packageRoot, subdirectory), { recursive: true });
-    fs.writeFileSync(path.join(packageRoot, 'README.md'), 'utm_source=opensource service_activepieces_readme_api_key');
+    fs.writeFileSync(path.join(packageRoot, 'README.md'), '[Application key](https://platform.acedata.cloud/console/applications?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen)');
     fs.writeFileSync(path.join(packageRoot, 'README.zh-CN.md'), '中文');
     fs.writeFileSync(path.join(packageRoot, 'examples/quickstart.json'), '{}');
     fs.writeFileSync(path.join(packageRoot, 'dist/src/index.js'), 'module.exports = {}');

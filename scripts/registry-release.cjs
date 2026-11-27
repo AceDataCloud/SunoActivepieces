@@ -55,7 +55,13 @@ function newer(a, b) {
       if (!files.some(file => file === required || file.startsWith(required))) throw new Error(`Published archive misses ${required}`);
     }
     const english = execFileSync('tar', ['-xOzf', archive, 'package/README.md'], { encoding: 'utf8' });
-    if (!english.includes('utm_source=opensource') || !english.includes('_activepieces_')) throw new Error('Published guide misses canonical source attribution.');
+    const links = [...english.matchAll(/\]\((https:\/\/platform\.acedata\.cloud\/[^\s)]+)\)/g)]
+      .map(match => new URL(match[1]))
+      .filter(url => /^\/(?:console\/applications|models|services\/|documents\/)/.test(url.pathname));
+    const valid = links.length > 0 && links.every(({ searchParams }) =>
+      searchParams.get('utm_source') === 'opensource' && searchParams.get('utm_medium') === 'referral' &&
+      searchParams.get('utm_campaign') === 'evergreen' && [...searchParams.keys()].filter(key => key.startsWith('utm_')).length === 3);
+    if (!valid) throw new Error('Published guide misses canonical source attribution.');
     const attestationUrl = metadata.dist.attestations?.url;
     if (!attestationUrl || new URL(attestationUrl).hostname !== 'registry.npmjs.org') throw new Error('Published package has no registry attestation.');
     const attestations = await read(attestationUrl);

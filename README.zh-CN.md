@@ -2,11 +2,11 @@
 
 通过 Ace Data Cloud 创建 Suno 音乐，并按**同一个任务 ID** 查询结果。Piece 提供两个动作：**Create Suno audio task**（创建音频任务）和 **Get Suno task**（查询任务）。创建请求返回任务 ID 不代表音频已经完成。[English](README.md)
 
-**分发状态：**[`@acedatacloud/piece-suno`](https://www.npmjs.com/package/@acedatacloud/piece-suno) 已作为附带 provenance 的公开 npm 包分发。实例管理员可安装 `0.1.2`；它尚未进入 Activepieces 共享公共目录。上游当前暂停接收外部作者向 monorepo 发起的非邀约 PR，允许作者在仓库外发布自己的 Piece 包。
+**分发状态：**[`@acedatacloud/piece-suno`](https://www.npmjs.com/package/@acedatacloud/piece-suno) 已作为附带 provenance 的公开 npm 包分发。实例管理员可安装 `0.1.3`；它尚未进入 Activepieces 共享公共目录。上游当前暂停接收外部作者向 monorepo 发起的非邀约 PR，允许作者在仓库外发布自己的 Piece 包。
 
 ## 1. 安装 Piece
 
-在 Activepieces 0.92.2 中进入 **Platform Admin → Catalogue → Pieces → Install Piece**，选择 **NPM Registry**，填写 `@acedatacloud/piece-suno` 和版本 `0.1.2`，点击 **Install**。我们实测的社区版中，**Packed Archive (.tgz)** 选项处于禁用状态。
+在 Activepieces 0.92.2 中进入 **Platform Admin → Catalogue → Pieces → Install Piece**，选择 **NPM Registry**，填写 `@acedatacloud/piece-suno` 和版本 `0.1.3`，点击 **Install**。我们实测的社区版中，**Packed Archive (.tgz)** 选项处于禁用状态。
 
 安装后，在流程中添加动作并搜索 **Suno by Ace Data Cloud**，核对名称、Ace Data Cloud Logo 和两个动作。源码仓库或 npm 上有包，不等于所有 Activepieces 用户都能在共享目录里直接搜到；目标实例仍需管理员安装。
 
@@ -29,8 +29,8 @@ npm pack
 
 新账号请先注册并登录。若 Applications 页面没有通用应用，点击 **Initialize General Application**。通用应用 Key 可访问账号已获授权的服务；专用应用 Key 仅限对应服务。
 
-1. 登录 [Ace Data Cloud Applications](https://platform.acedata.cloud/console/applications?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_api_key)。
-2. 打开具备 **Suno** 权限的应用，生成前查看当前[价格](https://platform.acedata.cloud/models?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_pricing)和余额。
+1. 登录 [Ace Data Cloud Applications](https://platform.acedata.cloud/console/applications?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen)。
+2. 打开具备 **Suno** 权限的应用，生成前查看当前[价格](https://platform.acedata.cloud/models?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen)和余额。
 3. 使用应用卡片的复制按钮，或进入 **Manage Keys → Create** 创建名为 `Activepieces Suno` 的独立 Key，按需设置有效期、用量限制与 API 限制，创建后复制 Key。若设置 **Allowed APIs**，应同时包含 `/suno/audios` 与 `/suno/tasks`。
 
 在 Activepieces 连接中只填 Key 本身，不要加 `Bearer `。平台管理 Token 不是生成 API Key。不要把 Key 写进提示词或流程导出文件。
@@ -75,7 +75,7 @@ curl -X POST https://api.acedata.cloud/suno/tasks \
 
 ## 4. 核对费用与排障
 
-在 [Ace Data Cloud 的请求历史和账单](https://platform.acedata.cloud/console/usages?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_request_history)里核对**一次**创建请求、任务 ID 和 Credits 扣费。查询任务不会新建歌曲。每次付费生成前应读取控制台当前价格和服务权限。
+在 [Ace Data Cloud 的请求历史和账单](https://platform.acedata.cloud/console/usages?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen)里核对**一次**创建请求、任务 ID 和 Credits 扣费。查询任务不会新建歌曲。每次付费生成前应读取控制台当前价格和服务权限。
 
 | 现象 | 处理 |
 | --- | --- |

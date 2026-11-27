@@ -2,11 +2,11 @@
 
 Create Suno music and retrieve the **same task** through Ace Data Cloud. The Piece has two actions: **Create Suno audio task** and **Get Suno task**. A successful submission returns a task ID; it does not mean the audio is ready.
 
-**Distribution:** [`@acedatacloud/piece-suno`](https://www.npmjs.com/package/@acedatacloud/piece-suno) is a public npm package with provenance. An administrator can install version `0.1.2` into their Activepieces instance. It is not listed in the shared Activepieces catalog. Activepieces currently permits external authors to publish Pieces as their own packages while unsolicited monorepo pull requests are paused. [中文指南](README.zh-CN.md)
+**Distribution:** [`@acedatacloud/piece-suno`](https://www.npmjs.com/package/@acedatacloud/piece-suno) is a public npm package with provenance. An administrator can install version `0.1.3` into their Activepieces instance. It is not listed in the shared Activepieces catalog. Activepieces currently permits external authors to publish Pieces as their own packages while unsolicited monorepo pull requests are paused. [中文指南](README.zh-CN.md)
 
 ## 1. Install the Piece
 
-In Activepieces 0.92.2, open **Platform Admin → Catalogue → Pieces → Install Piece**. Select **NPM Registry**, enter `@acedatacloud/piece-suno` and version `0.1.2`, then choose **Install**. On the Community Edition instance tested for this guide, **Packed Archive (.tgz)** was disabled in the UI.
+In Activepieces 0.92.2, open **Platform Admin → Catalogue → Pieces → Install Piece**. Select **NPM Registry**, enter `@acedatacloud/piece-suno` and version `0.1.3`, then choose **Install**. On the Community Edition instance tested for this guide, **Packed Archive (.tgz)** was disabled in the UI.
 
 After installation, open a flow and search for **Suno by Ace Data Cloud** when adding an action. Check the Piece name, Ace Data Cloud logo and the two actions before configuring credentials. A package in a repository or on npm is not automatically listed for every Activepieces user; the administrator must install it in the target instance.
 
@@ -29,8 +29,8 @@ The `.tgz` contains compiled JavaScript and declarations. Do not put a key in th
 
 New account? Register and sign in first. If the Applications page has no General application, choose **Initialize General Application**. A General key can access the services your account is entitled to use; a service-specific key is limited to that service.
 
-1. Sign in to [Ace Data Cloud Applications](https://platform.acedata.cloud/console/applications?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_api_key).
-2. Open an application with **Suno** access. Check the current [pricing](https://platform.acedata.cloud/models?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_pricing) and balance before generating.
+1. Sign in to [Ace Data Cloud Applications](https://platform.acedata.cloud/console/applications?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen).
+2. Open an application with **Suno** access. Check the current [pricing](https://platform.acedata.cloud/models?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen) and balance before generating.
 3. Use the application's copy button, or open **Manage Keys → Create** to create a separate key named `Activepieces Suno`. Set expiry, usage limits and API restrictions as needed, then copy the created key. If you restrict **Allowed APIs**, include both `/suno/audios` and `/suno/tasks`.
 
 Use the API key itself in Activepieces, without a `Bearer ` prefix. A platform management token is not a generation API key. Keep the key in an Activepieces connection, never a prompt or flow export.
@@ -75,7 +75,7 @@ curl -X POST https://api.acedata.cloud/suno/tasks \
 
 ## 4. Check cost and troubleshoot
 
-Confirm the **one** creation request, task ID and Credits deduction in [Ace Data Cloud request history and billing](https://platform.acedata.cloud/console/usages?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen&utm_content=suno_activepieces_readme_request_history). Task queries do not create another song. Current prices and entitlements may change; read them in the console before each paid generation.
+Confirm the **one** creation request, task ID and Credits deduction in [Ace Data Cloud request history and billing](https://platform.acedata.cloud/console/usages?utm_source=opensource&utm_medium=referral&utm_campaign=evergreen). Task queries do not create another song. Current prices and entitlements may change; read them in the console before each paid generation.
 
 | Result | Action |
 | --- | --- |

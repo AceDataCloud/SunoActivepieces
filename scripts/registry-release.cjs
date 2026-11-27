@@ -5,7 +5,7 @@ const crypto = require('node:crypto');
 const { execFileSync } = require('node:child_process');
 const pkg = require(path.resolve('package.json'));
 const registry = 'https://registry.npmjs.org/';
-const endpoint = registry + pkg.name.replace('/', '%2f');
+const endpoint = registry + encodeURIComponent(pkg.name);
 async function read(url, optional = false) {
   const response = await fetch(url, { signal: AbortSignal.timeout(30_000) });
   if (optional && response.status === 404) return null;
@@ -28,13 +28,10 @@ function newer(a, b) {
   }
   if (process.argv[2] !== 'verify') throw new Error('Use check or verify.');
   let metadata;
-  for (let attempt = 0; attempt < 12; attempt++) {
-    const fresh = `?ace_readback=${Date.now()}-${attempt}`;
-    metadata = await read(`${endpoint}/${pkg.version}${fresh}`, true);
-    if (!metadata) {
-      const packument = await read(`${endpoint}${fresh}`, true);
-      metadata = packument?.versions?.[pkg.version];
-    }
+  for (let attempt = 0; attempt < 24; attempt++) {
+    const packument = await read(endpoint, true);
+    metadata = packument?.versions?.[pkg.version];
+    if (!metadata) metadata = await read(`${registry}${pkg.name}/${pkg.version}`, true);
     if (metadata) break;
     await new Promise(resolve => setTimeout(resolve, 5000));
   }

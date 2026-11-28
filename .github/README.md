@@ -29,11 +29,11 @@ The `.tgz` contains compiled JavaScript and declarations. Do not put a key in th
 
 ## 2. Get an Ace Data Cloud API key
 
-New account? Register and sign in first. If the Applications page has no General application, choose **Initialize General Application**. A General key can access the services your account is entitled to use; a service-specific key is limited to that service.
+The Applications page prepares your **General Application** card automatically after sign-in. A General key can access the services your account is entitled to use; a service-specific key is limited to that service.
 
 1. Sign in to [Ace Data Cloud Applications](https://platform.acedata.cloud/console/applications?utm_source=github&utm_medium=referral&utm_campaign=evergreen).
-2. Open an application with **Suno** access. Check the current [pricing](https://platform.acedata.cloud/models?utm_source=github&utm_medium=referral&utm_campaign=evergreen) and balance before generating.
-3. Use the application's copy button, or open **Manage Keys → Create** to create a separate key named `Activepieces Suno`. Set expiry, usage limits and API restrictions as needed, then copy the created key. If you restrict **Allowed APIs**, include both `/suno/audios` and `/suno/tasks`.
+2. Use the card for an application with **Suno** access. Check the current [pricing](https://platform.acedata.cloud/models?utm_source=github&utm_medium=referral&utm_campaign=evergreen) before generating. If the application balance is low, click **Top Up** on its card.
+3. Click the copy button beside **API KEY** on the application card, or open **Manage Keys → Create** to create a separate key named `Activepieces Suno`. Set expiry, usage limits and API restrictions as needed, then copy the created key. If you restrict **Allowed APIs**, include both `/suno/audios` and `/suno/tasks`.
 
 Use the API key itself in Activepieces, without a `Bearer ` prefix. A platform management token is not a generation API key. Keep the key in an Activepieces connection, never a prompt or flow export.
 

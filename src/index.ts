@@ -5,7 +5,7 @@ import { getTask } from './lib/actions/get-task';
 import { sunoAuth } from './lib/auth';
 
 export const suno = createPiece({
-  displayName: 'Suno by Ace Data Cloud',
+  displayName: 'Suno',
   description: 'Create Suno music and retrieve the same task through Ace Data Cloud.',
   logoUrl: 'https://cdn.acedata.cloud/l3ffw7.jpg',
   authors: ['Ace Data Cloud'],

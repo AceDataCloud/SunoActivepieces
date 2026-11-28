@@ -2,13 +2,13 @@
 
 通过 Ace Data Cloud 创建 Suno 音乐，并按**同一个任务 ID** 查询结果。Piece 提供两个动作：**Create Suno audio task**（创建音频任务）和 **Get Suno task**（查询任务）。创建请求返回任务 ID 不代表音频已经完成。[English](README.md)
 
-**分发状态：**[`@acedatacloud/piece-suno`](https://www.npmjs.com/package/@acedatacloud/piece-suno) 已作为附带 provenance 的公开 npm 包分发。实例管理员可安装 `0.1.4`；它尚未进入 Activepieces 共享公共目录。上游当前暂停接收外部作者向 monorepo 发起的非邀约 PR，允许作者在仓库外发布自己的 Piece 包。
+**分发状态：**[`@acedatacloud/piece-suno`](https://www.npmjs.com/package/@acedatacloud/piece-suno) 已作为附带 provenance 的公开 npm 包分发。实例管理员可安装 `0.1.5`；它尚未进入 Activepieces 共享公共目录。上游当前暂停接收外部作者向 monorepo 发起的非邀约 PR，允许作者在仓库外发布自己的 Piece 包。
 
 ## 1. 安装 Piece
 
-在 Activepieces 0.92.2 中进入 **Platform Admin → Catalogue → Pieces → Install Piece**，选择 **NPM Registry**，填写 `@acedatacloud/piece-suno` 和版本 `0.1.4`，点击 **Install**。我们实测的社区版中，**Packed Archive (.tgz)** 选项处于禁用状态。
+在 Activepieces 0.92.2 中进入 **Platform Admin → Catalogue → Pieces → Install Piece**，选择 **NPM Registry**，填写 `@acedatacloud/piece-suno` 和版本 `0.1.5`，点击 **Install**。我们实测的社区版中，**Packed Archive (.tgz)** 选项处于禁用状态。
 
-安装后，在流程中添加动作并搜索 **Suno by Ace Data Cloud**，核对名称、Ace Data Cloud Logo 和两个动作。源码仓库或 npm 上有包，不等于所有 Activepieces 用户都能在共享目录里直接搜到；目标实例仍需管理员安装。
+安装后，在流程中添加动作并搜索 **Suno**，核对名称、Ace Data Cloud Logo 和两个动作。源码仓库或 npm 上有包，不等于所有 Activepieces 用户都能在共享目录里直接搜到；目标实例仍需管理员安装。
 
 以下截图来自独立的 Activepieces CE 0.92.2 实例，通过官方 API 安装构建好的包。它们证明实例内可用，不代表进入了共享公共目录：
 
@@ -38,7 +38,7 @@ npm pack
 ## 3. 建立首个流程
 
 1. 选择 **Start from scratch**，再选择适合项目的触发器。若使用我们实测的手动首跑示例，目标实例没有 **Manual Trigger** 时先安装官方 `@activepieces/piece-manual-trigger` 版本 `0.0.8`。
-2. 添加 **Suno by Ace Data Cloud → Create Suno audio task**，使用 Ace Data Cloud API Key 新建连接。
+2. 添加 **Suno → Create Suno audio task**，使用 Ace Data Cloud API Key 新建连接。
 3. 模型选 `chirp-v6`，打开 **Instrumental only**，音乐描述填写：
 
    ```text
@@ -96,4 +96,4 @@ API 请求验证 HTTPS 证书，且仅访问 `api.acedata.cloud`。网络失败�
 ![创建独立 Key：真实脱敏 Ace 控制台](docs/screenshots/create-api-key-en.png)
 ![官方 Activepieces 通用安装弹窗](docs/screenshots/install-piece.png)
 
-2026-10-18 复用的真实/官方参考图，[固定来源与边界](docs/screenshots/onboarding-source.json)保留。安装图不是本 Piece 已被官方共享目录收录的证明。管理员安装后按服务名搜索并核对 **by Ace Data Cloud**；Key 只放动作连接。源码 PR、npm 发版、官方目录收录与真实首用分别验收。
+2026-10-18 复用的真实/官方参考图，[固定来源与边界](docs/screenshots/onboarding-source.json)保留。安装图不是本 Piece 已被官方共享目录收录的证明。管理员安装后按服务名搜索并核对 **Suno** 和已安装的 `@acedatacloud/piece-suno` 包；Key 只放动作连接。源码 PR、npm 发版、官方目录收录与真实首用分别验收。

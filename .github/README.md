@@ -4,13 +4,13 @@
 
 Create Suno music and retrieve the **same task** through Ace Data Cloud. The Piece has two actions: **Create Suno audio task** and **Get Suno task**. A successful submission returns a task ID; it does not mean the audio is ready.
 
-**Distribution:** [`@acedatacloud/piece-suno`](https://www.npmjs.com/package/@acedatacloud/piece-suno) is a public npm package with provenance. An administrator can install version `0.1.4` into their Activepieces instance. It is not listed in the shared Activepieces catalog. Activepieces currently permits external authors to publish Pieces as their own packages while unsolicited monorepo pull requests are paused. [中文指南](../README.zh-CN.md)
+**Distribution:** [`@acedatacloud/piece-suno`](https://www.npmjs.com/package/@acedatacloud/piece-suno) is a public npm package with provenance. An administrator can install version `0.1.5` into their Activepieces instance. It is not listed in the shared Activepieces catalog. Activepieces currently permits external authors to publish Pieces as their own packages while unsolicited monorepo pull requests are paused. [中文指南](../README.zh-CN.md)
 
 ## 1. Install the Piece
 
-In Activepieces 0.92.2, open **Platform Admin → Catalogue → Pieces → Install Piece**. Select **NPM Registry**, enter `@acedatacloud/piece-suno` and version `0.1.4`, then choose **Install**. On the Community Edition instance tested for this guide, **Packed Archive (.tgz)** was disabled in the UI.
+In Activepieces 0.92.2, open **Platform Admin → Catalogue → Pieces → Install Piece**. Select **NPM Registry**, enter `@acedatacloud/piece-suno` and version `0.1.5`, then choose **Install**. On the Community Edition instance tested for this guide, **Packed Archive (.tgz)** was disabled in the UI.
 
-After installation, open a flow and search for **Suno by Ace Data Cloud** when adding an action. Check the Piece name, Ace Data Cloud logo and the two actions before configuring credentials. A package in a repository or on npm is not automatically listed for every Activepieces user; the administrator must install it in the target instance.
+After installation, open a flow and search for **Suno** when adding an action. Check the Piece name, Ace Data Cloud logo and the two actions before configuring credentials. A package in a repository or on npm is not automatically listed for every Activepieces user; the administrator must install it in the target instance.
 
 These screenshots come from an isolated Activepieces CE 0.92.2 instance where the build archive was installed through the official API. They show instance installation, not a shared catalog listing:
 
@@ -40,7 +40,7 @@ Use the API key itself in Activepieces, without a `Bearer ` prefix. A platform m
 ## 3. Configure a first flow
 
 1. Choose **Start from scratch**, then select a trigger suitable for your project. For the tested on-demand example, install the official `@activepieces/piece-manual-trigger` version `0.0.8` if it is not already in your instance, and choose **Manual Trigger**.
-2. Add **Suno by Ace Data Cloud → Create Suno audio task**. Create a connection with the Ace Data Cloud API key.
+2. Add **Suno → Create Suno audio task**. Create a connection with the Ace Data Cloud API key.
 3. Use model `chirp-v6`, turn **Instrumental only** on, and enter this music description:
 
    ```text
@@ -98,4 +98,4 @@ API requests verify HTTPS certificates and stay on `api.acedata.cloud`. Transpor
 ![Create a dedicated key: real redacted Ace console](../docs/screenshots/create-api-key-en.png)
 ![Official Activepieces generic installation dialog](../docs/screenshots/install-piece.png)
 
-References reused on 2026-10-18; [fixed sources and limits](../docs/screenshots/onboarding-source.json). The installation picture is an official generic reference, not proof this Piece is in the shared catalog. After administrator installation, search the service name, select **by Ace Data Cloud**, and keep the raw API key in the action connection. Source PR, immutable npm release, official shared-catalog acceptance and first use are separate stages.
+References reused on 2026-10-18; [fixed sources and limits](../docs/screenshots/onboarding-source.json). The installation picture is an official generic reference, not proof this Piece is in the shared catalog. After administrator installation, search the service name, select **Suno** from the installed `@acedatacloud/piece-suno` package, and keep the raw API key in the action connection. Source PR, immutable npm release, official shared-catalog acceptance and first use are separate stages.
